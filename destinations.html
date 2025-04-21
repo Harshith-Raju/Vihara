@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations - VIHARA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .destinations-hero {
+            height: 50vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url('images/destinations-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-text);
+            margin-top: 80px;
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .destination-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .destination-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: var(--light-text);
+        }
+
+        .destination-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .destination-info p {
+            margin-bottom: 1rem;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+            background: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: var(--light-text);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>VIHARA</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="destinations.html" class="active">Destinations</a></li>
+                <li><a href="tours.html">Tours & Packages</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn-login">Login</a>
+                <a href="register.html" class="btn-register">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Destinations Hero -->
+    <section class="destinations-hero">
+        <div class="hero-content">
+            <h1>Explore Our Destinations</h1>
+            <p>Discover amazing places around the world</p>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="asia">Asia</button>
+        <button class="filter-btn" data-filter="europe">Europe</button>
+        <button class="filter-btn" data-filter="america">America</button>
+        <button class="filter-btn" data-filter="africa">Africa</button>
+    </div>
+
+    <!-- Destinations Grid -->
+    <section class="destinations-grid">
+        <!-- Asia -->
+        <div class="destination-card" data-category="asia">
+            <img src="images/destination1.jpg" alt="Bali">
+            <div class="destination-info">
+                <h3>Bali, Indonesia</h3>
+                <p>Starting from $999</p>
+                <a href="#" class="btn-explore">Explore</a>
+            </div>
+        </div>
+        <div class="destination-card" data-category="asia">
+            <img src="images/destination2.jpg" alt="Tokyo">
+            <div class="destination-info">
+                <h3>Tokyo, Japan</h3>
+                <p>Starting from $1499</p>
+                <a href="#" class="btn-explore">Explore</a>
+            </div>
+        </div>
+
+        <!-- Europe -->
+        <div class="destination-card" data-category="europe">
+            <img src="images/destination3.jpg" alt="Paris">
+            <div class="destination-info">
+                <h3>Paris, France</h3>
+                <p>Starting from $1299</p>
+                <a href="#" class="btn-explore">Explore</a>
+            </div>
+        </div>
+        <div class="destination-card" data-category="europe">
+            <img src="images/destination4.jpg" alt="Rome">
+            <div class="destination-info">
+                <h3>Rome, Italy</h3>
+                <p>Starting from $1199</p>
+                <a href="#" class="btn-explore">Explore</a>
+            </div>
+        </div>
+
+        <!-- America -->
+        <div class="destination-card" data-category="america">
+            <img src="images/destination5.jpg" alt="New York">
+            <div class="destination-info">
+                <h3>New York, USA</h3>
+                <p>Starting from $999</p>
+                <a href="#" class="btn-explore">Explore</a>
+            </div>
+        </div>
+        <div class="destination-card" data-category="america">
+            <img src="images/destination6.jpg" alt="Vancouver">
+            <div class="destination-info">
+                <h3>Vancouver, Canada</h3>
+                <p>Starting from $1099</p>
+                <a href="#" class="btn-explore">Explore</a>
+            </div>
+        </div>
+
+        <!-- Africa -->
+        <div class="destination-card" data-category="africa">
+            <img src="images/destination7.jpg" alt="Cape Town">
+            <div class="destination-info">
+                <h3>Cape Town, South Africa</h3>
+                <p>Starting from $1399</p>
+                <a href="#" class="btn-explore">Explore</a>
+            </div>
+        </div>
+        <div class="destination-card" data-category="africa">
+            <img src="images/destination8.jpg" alt="Marrakech">
+            <div class="destination-info">
+                <h3>Marrakech, Morocco</h3>
+                <p>Starting from $899</p>
+                <a href="#" class="btn-explore">Explore</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About VIHARA</h3>
+                <p>Your trusted travel companion for unforgettable experiences around the world.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@vihara.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 VIHARA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const destinationCards = document.querySelectorAll('.destination-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filter = button.getAttribute('data-filter');
+
+                destinationCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

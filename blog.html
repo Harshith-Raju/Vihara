@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - VIHARA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .blog-hero {
+            height: 50vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url('images/blog-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-text);
+            margin-top: 80px;
+        }
+
+        .blog-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .blog-post {
+            background: var(--background-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-post:hover .blog-image img {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .blog-content h2 {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            color: var(--gray-dark);
+        }
+
+        .blog-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .blog-tag {
+            padding: 0.3rem 0.8rem;
+            background: var(--skin-tone);
+            color: var(--primary-color);
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .btn-read-more {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: var(--light-text);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-read-more:hover {
+            background: var(--accent-color);
+        }
+
+        .blog-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-widget {
+            background: var(--background-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-widget h3 {
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .sidebar-widget h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .search-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-form input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 25px;
+        }
+
+        .search-form button {
+            padding: 0.8rem 1.2rem;
+            background: var(--primary-color);
+            color: var(--light-text);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-form button:hover {
+            background: var(--accent-color);
+        }
+
+        .categories-list {
+            list-style: none;
+        }
+
+        .categories-list li {
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .categories-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .categories-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            transition: color 0.3s ease;
+        }
+
+        .categories-list a:hover {
+            color: var(--primary-color);
+        }
+
+        .recent-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .recent-post {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .recent-post-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .recent-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .recent-post-content h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .recent-post-content a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .recent-post-content a:hover {
+            color: var(--primary-color);
+        }
+
+        .recent-post-date {
+            color: var(--gray-dark);
+            font-size: 0.8rem;
+        }
+
+        .tags-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag-cloud {
+            padding: 0.5rem 1rem;
+            background: var(--skin-tone);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .tag-cloud:hover {
+            background: var(--primary-color);
+            color: var(--light-text);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .page-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+            background: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--primary-color);
+            color: var(--light-text);
+        }
+
+        @media (max-width: 992px) {
+            .blog-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>VIHARA</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="tours.html">Tours & Packages</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn-login">Login</a>
+                <a href="register.html" class="btn-register">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Blog Hero -->
+    <section class="blog-hero">
+        <div class="hero-content">
+            <h1>Travel Blog</h1>
+            <p>Stories, tips, and inspiration for your next adventure</p>
+        </div>
+    </section>
+
+    <!-- Blog Container -->
+    <section class="blog-container">
+        <!-- Blog Posts -->
+        <div class="blog-posts">
+            <!-- Blog Post 1 -->
+            <article class="blog-post">
+                <div class="blog-image">
+                    <img src="images/blog1.jpg" alt="Top 10 Hidden Gems in Europe">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> June 15, 2024</span>
+                        <span><i class="far fa-user"></i> By John Doe</span>
+                        <span><i class="far fa-comments"></i> 5 Comments</span>
+                    </div>
+                    <h2>Top 10 Hidden Gems in Europe You Need to Visit</h2>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Europe</span>
+                        <span class="blog-tag">Travel Tips</span>
+                        <span class="blog-tag">Destinations</span>
+                    </div>
+                    <p>Discover the lesser-known destinations in Europe that offer unique experiences without the crowds. From charming villages to stunning natural landscapes, these hidden gems will make your European adventure truly special.</p>
+                    <a href="#" class="btn-read-more">Read More</a>
+                </div>
+            </article>
+
+            <!-- Blog Post 2 -->
+            <article class="blog-post">
+                <div class="blog-image">
+                    <img src="images/blog2.jpg" alt="Ultimate Packing Guide">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> June 10, 2024</span>
+                        <span><i class="far fa-user"></i> By Jane Smith</span>
+                        <span><i class="far fa-comments"></i> 3 Comments</span>
+                    </div>
+                    <h2>The Ultimate Packing Guide for Every Type of Trip</h2>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Travel Tips</span>
+                        <span class="blog-tag">Packing</span>
+                    </div>
+                    <p>Learn how to pack efficiently for any type of trip, whether it's a beach vacation, a city break, or an adventure in the mountains. Our comprehensive guide will help you travel lighter and smarter.</p>
+                    <a href="#" class="btn-read-more">Read More</a>
+                </div>
+            </article>
+
+            <!-- Blog Post 3 -->
+            <article class="blog-post">
+                <div class="blog-image">
+                    <img src="images/blog3.jpg" alt="Sustainable Travel">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> June 5, 2024</span>
+                        <span><i class="far fa-user"></i> By Mike Johnson</span>
+                        <span><i class="far fa-comments"></i> 7 Comments</span>
+                    </div>
+                    <h2>Sustainable Travel: How to Explore the World Responsibly</h2>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Sustainability</span>
+                        <span class="blog-tag">Travel Tips</span>
+                        <span class="blog-tag">Eco-Friendly</span>
+                    </div>
+                    <p>Discover how to travel sustainably and minimize your environmental impact while exploring the world. From choosing eco-friendly accommodations to supporting local communities, learn how to be a responsible traveler.</p>
+                    <a href="#" class="btn-read-more">Read More</a>
+                </div>
+            </article>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">Next</button>
+            </div>
+        </div>
+
+        <!-- Blog Sidebar -->
+        <aside class="blog-sidebar">
+            <!-- Search Widget -->
+            <div class="sidebar-widget">
+                <h3>Search</h3>
+                <form class="search-form">
+                    <input type="text" placeholder="Search...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
+            <!-- Categories Widget -->
+            <div class="sidebar-widget">
+                <h3>Categories</h3>
+                <ul class="categories-list">
+                    <li><a href="#">Destinations <span>(15)</span></a></li>
+                    <li><a href="#">Travel Tips <span>(12)</span></a></li>
+                    <li><a href="#">Adventure <span>(8)</span></a></li>
+                    <li><a href="#">Food & Culture <span>(10)</span></a></li>
+                    <li><a href="#">Travel Stories <span>(7)</span></a></li>
+                    <li><a href="#">Sustainability <span>(5)</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Recent Posts Widget -->
+            <div class="sidebar-widget">
+                <h3>Recent Posts</h3>
+                <div class="recent-posts">
+                    <div class="recent-post">
+                        <div class="recent-post-image">
+                            <img src="images/blog1.jpg" alt="Top 10 Hidden Gems">
+                        </div>
+                        <div class="recent-post-content">
+                            <h4><a href="#">Top 10 Hidden Gems in Europe</a></h4>
+                            <span class="recent-post-date">June 15, 2024</span>
+                        </div>
+                    </div>
+                    <div class="recent-post">
+                        <div class="recent-post-image">
+                            <img src="images/blog2.jpg" alt="Ultimate Packing Guide">
+                        </div>
+                        <div class="recent-post-content">
+                            <h4><a href="#">The Ultimate Packing Guide</a></h4>
+                            <span class="recent-post-date">June 10, 2024</span>
+                        </div>
+                    </div>
+                    <div class="recent-post">
+                        <div class="recent-post-image">
+                            <img src="images/blog3.jpg" alt="Sustainable Travel">
+                        </div>
+                        <div class="recent-post-content">
+                            <h4><a href="#">Sustainable Travel Guide</a></h4>
+                            <span class="recent-post-date">June 5, 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tags Widget -->
+            <div class="sidebar-widget">
+                <h3>Tags</h3>
+                <div class="tags-cloud">
+                    <a href="#" class="tag-cloud">Europe</a>
+                    <a href="#" class="tag-cloud">Asia</a>
+                    <a href="#" class="tag-cloud">Adventure</a>
+                    <a href="#" class="tag-cloud">Food</a>
+                    <a href="#" class="tag-cloud">Culture</a>
+                    <a href="#" class="tag-cloud">Beach</a>
+                    <a href="#" class="tag-cloud">Mountains</a>
+                    <a href="#" class="tag-cloud">City</a>
+                    <a href="#" class="tag-cloud">Travel Tips</a>
+                    <a href="#" class="tag-cloud">Sustainability</a>
+                </div>
+            </div>
+        </aside>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About VIHARA</h3>
+                <p>Your trusted travel companion for unforgettable experiences around the world.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@vihara.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 VIHARA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 

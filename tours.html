@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tours & Packages - VIHARA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .tours-hero {
+            height: 50vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url('images/tours-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-text);
+            margin-top: 80px;
+        }
+
+        .tours-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 5%;
+        }
+
+        .tour-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 0.8rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+            background: none;
+            color: var(--text-color);
+        }
+
+        .tours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .tour-card {
+            background: var(--background-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tour-image {
+            position: relative;
+            height: 200px;
+        }
+
+        .tour-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tour-duration {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .tour-content {
+            padding: 1.5rem;
+        }
+
+        .tour-title {
+            margin-bottom: 1rem;
+        }
+
+        .tour-title h3 {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .tour-location {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .tour-features {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .tour-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .price {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .btn-book {
+            padding: 0.5rem 1.5rem;
+            background: var(--primary-color);
+            color: var(--light-text);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-book:hover {
+            background: var(--accent-color);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .page-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+            background: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--primary-color);
+            color: var(--light-text);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>VIHARA</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="tours.html" class="active">Tours & Packages</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn-login">Login</a>
+                <a href="register.html" class="btn-register">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Tours Hero -->
+    <section class="tours-hero">
+        <div class="hero-content">
+            <h1>Tour Packages</h1>
+            <p>Find the perfect tour package for your next adventure</p>
+        </div>
+    </section>
+
+    <!-- Tours Container -->
+    <section class="tours-container">
+        <!-- Tour Filters -->
+        <div class="tour-filters">
+            <div class="search-box">
+                <input type="text" placeholder="Search tours...">
+            </div>
+            <div class="filter-options">
+                <select class="filter-select">
+                    <option value="">Duration</option>
+                    <option value="1-3">1-3 Days</option>
+                    <option value="4-7">4-7 Days</option>
+                    <option value="8-14">8-14 Days</option>
+                    <option value="15+">15+ Days</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">Price Range</option>
+                    <option value="0-999">$0 - $999</option>
+                    <option value="1000-1999">$1000 - $1999</option>
+                    <option value="2000+">$2000+</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">Tour Type</option>
+                    <option value="adventure">Adventure</option>
+                    <option value="cultural">Cultural</option>
+                    <option value="relaxation">Relaxation</option>
+                    <option value="luxury">Luxury</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Tours Grid -->
+        <div class="tours-grid">
+            <!-- Tour Card 1 -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="images/tour1.jpg" alt="Bali Adventure">
+                    <div class="tour-duration">7 Days</div>
+                </div>
+                <div class="tour-content">
+                    <div class="tour-title">
+                        <h3>Bali Adventure Package</h3>
+                        <p class="tour-location"><i class="fas fa-map-marker-alt"></i> Bali, Indonesia</p>
+                    </div>
+                    <div class="tour-features">
+                        <span class="feature"><i class="fas fa-hotel"></i> 4 Star Hotel</span>
+                        <span class="feature"><i class="fas fa-utensils"></i> Breakfast Included</span>
+                        <span class="feature"><i class="fas fa-plane"></i> Flight Included</span>
+                    </div>
+                    <div class="tour-price">
+                        <span class="price">$999</span>
+                        <button class="btn-book">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour Card 2 -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="images/tour2.jpg" alt="Paris Explorer">
+                    <div class="tour-duration">5 Days</div>
+                </div>
+                <div class="tour-content">
+                    <div class="tour-title">
+                        <h3>Paris Explorer Package</h3>
+                        <p class="tour-location"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                    </div>
+                    <div class="tour-features">
+                        <span class="feature"><i class="fas fa-hotel"></i> 5 Star Hotel</span>
+                        <span class="feature"><i class="fas fa-utensils"></i> All Meals</span>
+                        <span class="feature"><i class="fas fa-plane"></i> Flight Included</span>
+                    </div>
+                    <div class="tour-price">
+                        <span class="price">$1299</span>
+                        <button class="btn-book">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour Card 3 -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="images/tour3.jpg" alt="Tokyo Cultural">
+                    <div class="tour-duration">10 Days</div>
+                </div>
+                <div class="tour-content">
+                    <div class="tour-title">
+                        <h3>Tokyo Cultural Experience</h3>
+                        <p class="tour-location"><i class="fas fa-map-marker-alt"></i> Tokyo, Japan</p>
+                    </div>
+                    <div class="tour-features">
+                        <span class="feature"><i class="fas fa-hotel"></i> 4 Star Hotel</span>
+                        <span class="feature"><i class="fas fa-utensils"></i> Breakfast & Dinner</span>
+                        <span class="feature"><i class="fas fa-plane"></i> Flight Included</span>
+                    </div>
+                    <div class="tour-price">
+                        <span class="price">$1499</span>
+                        <button class="btn-book">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour Card 4 -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="images/tour4.jpg" alt="New York City">
+                    <div class="tour-duration">6 Days</div>
+                </div>
+                <div class="tour-content">
+                    <div class="tour-title">
+                        <h3>New York City Explorer</h3>
+                        <p class="tour-location"><i class="fas fa-map-marker-alt"></i> New York, USA</p>
+                    </div>
+                    <div class="tour-features">
+                        <span class="feature"><i class="fas fa-hotel"></i> 4 Star Hotel</span>
+                        <span class="feature"><i class="fas fa-utensils"></i> Breakfast Included</span>
+                        <span class="feature"><i class="fas fa-plane"></i> Flight Included</span>
+                    </div>
+                    <div class="tour-price">
+                        <span class="price">$999</span>
+                        <button class="btn-book">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">Next</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About VIHARA</h3>
+                <p>Your trusted travel companion for unforgettable experiences around the world.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@vihara.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 VIHARA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Tour filtering functionality
+        const searchInput = document.querySelector('.search-box input');
+        const filterSelects = document.querySelectorAll('.filter-select');
+        const tourCards = document.querySelectorAll('.tour-card');
+
+        function filterTours() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const duration = filterSelects[0].value;
+            const price = filterSelects[1].value;
+            const type = filterSelects[2].value;
+
+            tourCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const cardDuration = card.querySelector('.tour-duration').textContent;
+                const cardPrice = parseInt(card.querySelector('.price').textContent.replace('$', ''));
+
+                const matchesSearch = title.includes(searchTerm);
+                const matchesDuration = !duration || cardDuration.includes(duration);
+                const matchesPrice = !price || (cardPrice >= parseInt(price.split('-')[0]) && 
+                                             cardPrice <= parseInt(price.split('-')[1]));
+
+                if (matchesSearch && matchesDuration && matchesPrice) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        searchInput.addEventListener('input', filterTours);
+        filterSelects.forEach(select => select.addEventListener('change', filterTours));
+
+        // Pagination functionality
+        const pageButtons = document.querySelectorAll('.page-btn');
+        pageButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                pageButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                // Add pagination logic here
+            });
+        });
+    </script>
+</body>
+</html> 

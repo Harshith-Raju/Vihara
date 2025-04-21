@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - VIHARA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gallery-hero {
+            height: 50vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url('images/gallery-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-text);
+            margin-top: 80px;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 5%;
+        }
+
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--background-color);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: var(--light-text);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 300px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+            color: var(--light-text);
+            margin-bottom: 0.5rem;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-overlay p {
+            color: var(--light-text);
+            transform: translateY(20px);
+            transition: transform 0.3s ease 0.1s;
+        }
+
+        .gallery-item:hover .gallery-overlay h3,
+        .gallery-item:hover .gallery-overlay p {
+            transform: translateY(0);
+        }
+
+        .load-more {
+            display: block;
+            margin: 3rem auto 0;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: var(--light-text);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .load-more:hover {
+            background: var(--accent-color);
+        }
+
+        /* Lightbox styles */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 5px;
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: var(--light-text);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--light-text);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-text);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 1rem;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .gallery-item {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>VIHARA</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="tours.html">Tours & Packages</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn-login">Login</a>
+                <a href="register.html" class="btn-register">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
+        <div class="hero-content">
+            <h1>Our Gallery</h1>
+            <p>Capturing moments from around the world</p>
+        </div>
+    </section>
+
+    <!-- Gallery Container -->
+    <section class="gallery-container">
+        <!-- Gallery Filters -->
+        <div class="gallery-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="landmarks">Landmarks</button>
+            <button class="filter-btn" data-filter="nature">Nature</button>
+            <button class="filter-btn" data-filter="culture">Culture</button>
+            <button class="filter-btn" data-filter="adventure">Adventure</button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid">
+            <!-- Gallery Item 1 -->
+            <div class="gallery-item" data-category="landmarks">
+                <img src="images/gallery1.jpg" alt="Eiffel Tower">
+                <div class="gallery-overlay">
+                    <h3>Eiffel Tower</h3>
+                    <p>Paris, France</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 2 -->
+            <div class="gallery-item" data-category="nature">
+                <img src="images/gallery2.jpg" alt="Grand Canyon">
+                <div class="gallery-overlay">
+                    <h3>Grand Canyon</h3>
+                    <p>Arizona, USA</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 3 -->
+            <div class="gallery-item" data-category="culture">
+                <img src="images/gallery3.jpg" alt="Taj Mahal">
+                <div class="gallery-overlay">
+                    <h3>Taj Mahal</h3>
+                    <p>Agra, India</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 4 -->
+            <div class="gallery-item" data-category="adventure">
+                <img src="images/gallery4.jpg" alt="Mountain Climbing">
+                <div class="gallery-overlay">
+                    <h3>Mountain Climbing</h3>
+                    <p>Swiss Alps</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 5 -->
+            <div class="gallery-item" data-category="landmarks">
+                <img src="images/gallery5.jpg" alt="Statue of Liberty">
+                <div class="gallery-overlay">
+                    <h3>Statue of Liberty</h3>
+                    <p>New York, USA</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 6 -->
+            <div class="gallery-item" data-category="nature">
+                <img src="images/gallery6.jpg" alt="Amazon Rainforest">
+                <div class="gallery-overlay">
+                    <h3>Amazon Rainforest</h3>
+                    <p>Brazil</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 7 -->
+            <div class="gallery-item" data-category="culture">
+                <img src="images/gallery7.jpg" alt="Japanese Temple">
+                <div class="gallery-overlay">
+                    <h3>Japanese Temple</h3>
+                    <p>Kyoto, Japan</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 8 -->
+            <div class="gallery-item" data-category="adventure">
+                <img src="images/gallery8.jpg" alt="Scuba Diving">
+                <div class="gallery-overlay">
+                    <h3>Scuba Diving</h3>
+                    <p>Great Barrier Reef, Australia</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 9 -->
+            <div class="gallery-item" data-category="landmarks">
+                <img src="images/gallery9.jpg" alt="Pyramids of Giza">
+                <div class="gallery-overlay">
+                    <h3>Pyramids of Giza</h3>
+                    <p>Cairo, Egypt</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 10 -->
+            <div class="gallery-item" data-category="nature">
+                <img src="images/gallery10.jpg" alt="Northern Lights">
+                <div class="gallery-overlay">
+                    <h3>Northern Lights</h3>
+                    <p>Iceland</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 11 -->
+            <div class="gallery-item" data-category="culture">
+                <img src="images/gallery11.jpg" alt="Traditional Market">
+                <div class="gallery-overlay">
+                    <h3>Traditional Market</h3>
+                    <p>Marrakech, Morocco</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 12 -->
+            <div class="gallery-item" data-category="adventure">
+                <img src="images/gallery12.jpg" alt="Safari">
+                <div class="gallery-overlay">
+                    <h3>Safari</h3>
+                    <p>Serengeti, Tanzania</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <button class="load-more">Load More</button>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox">
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-image">
+            <div class="lightbox-caption">
+                <h3></h3>
+                <p></p>
+            </div>
+        </div>
+        <div class="lightbox-close">&times;</div>
+        <div class="lightbox-nav lightbox-prev"><i class="fas fa-chevron-left"></i></div>
+        <div class="lightbox-nav lightbox-next"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About VIHARA</h3>
+                <p>Your trusted travel companion for unforgettable experiences around the world.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@vihara.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 VIHARA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Gallery filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Load more functionality
+        const loadMoreBtn = document.querySelector('.load-more');
+        const galleryGrid = document.querySelector('.gallery-grid');
+        
+        // Initially hide items beyond the first 8
+        for (let i = 8; i < galleryItems.length; i++) {
+            galleryItems[i].style.display = 'none';
+        }
+        
+        loadMoreBtn.addEventListener('click', () => {
+            let visibleCount = 0;
+            
+            galleryItems.forEach(item => {
+                if (item.style.display !== 'none') {
+                    visibleCount++;
+                }
+            });
+            
+            // Show 4 more items
+            for (let i = visibleCount; i < visibleCount + 4 && i < galleryItems.length; i++) {
+                galleryItems[i].style.display = 'block';
+            }
+            
+            // Hide the button if all items are visible
+            if (visibleCount + 4 >= galleryItems.length) {
+                loadMoreBtn.style.display = 'none';
+            }
+        });
+
+        // Lightbox functionality
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImage = document.querySelector('.lightbox-image');
+        const lightboxCaption = document.querySelector('.lightbox-caption h3');
+        const lightboxDescription = document.querySelector('.lightbox-caption p');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const lightboxPrev = document.querySelector('.lightbox-prev');
+        const lightboxNext = document.querySelector('.lightbox-next');
+        
+        let currentImageIndex = 0;
+        
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentImageIndex = index;
+                updateLightbox();
+                lightbox.classList.add('active');
+            });
+        });
+        
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+        
+        lightboxPrev.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+            updateLightbox();
+        });
+        
+        lightboxNext.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+            updateLightbox();
+        });
+        
+        function updateLightbox() {
+            const currentItem = galleryItems[currentImageIndex];
+            const imgSrc = currentItem.querySelector('img').getAttribute('src');
+            const imgAlt = currentItem.querySelector('img').getAttribute('alt');
+            const caption = currentItem.querySelector('.gallery-overlay h3').textContent;
+            const description = currentItem.querySelector('.gallery-overlay p').textContent;
+            
+            lightboxImage.setAttribute('src', imgSrc);
+            lightboxImage.setAttribute('alt', imgAlt);
+            lightboxCaption.textContent = caption;
+            lightboxDescription.textContent = description;
+        }
+    </script>
+</body>
+</html>
