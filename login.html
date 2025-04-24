@@ -1,350 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - VIHARA</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .auth-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 8rem 5% 5rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - VIHARA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #f77f00;
+      --accent-color: #e76f00;
+      --background-color: #ffffff;
+      --gray-light: #ddd;
+      --gray-dark: #666;
+      --text-color: #333;
+      --light-text: #fff;
+    }
 
-        .auth-image {
-            height: 100%;
-            min-height: 500px;
-            background: url('images/login-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px;
-            position: relative;
-        }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f2f2;
+    }
 
-        .auth-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
-            border-radius: 10px;
-        }
+    header {
+      background-color: #003049;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
 
-        .auth-image-content {
-            position: absolute;
-            bottom: 2rem;
-            left: 2rem;
-            color: var(--light-text);
-            z-index: 1;
-        }
+    header h1 {
+      margin: 0;
+    }
 
-        .auth-image-content h2 {
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
 
-        .auth-form-container {
-            background: var(--background-color);
-            border-radius: 10px;
-            padding: 3rem;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
-        }
+    .auth-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 5% 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
 
-        .auth-form-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+    .auth-image {
+      min-height: 500px;
+      background: url('images/login-bg.jpg') no-repeat center center/cover;
+      border-radius: 10px;
+      position: relative;
+    }
 
-        .auth-form-header h1 {
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-        }
+    .auth-image::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+      border-radius: 10px;
+    }
 
-        .auth-form-header p {
-            color: var(--gray-dark);
-        }
+    .auth-image-content {
+      position: absolute;
+      bottom: 2rem;
+      left: 2rem;
+      color: white;
+      z-index: 1;
+    }
 
-        .auth-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
+    .auth-image-content h2 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
+    .auth-form-container {
+      background: white;
+      padding: 3rem;
+      border-radius: 10px;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    }
 
-        .form-group label {
-            color: var(--text-color);
-            font-weight: 500;
-        }
+    .auth-form-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
 
-        .form-control {
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--gray-light);
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
+    .auth-form-header h1 {
+      color: var(--text-color);
+    }
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
 
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 0.5rem;
-        }
+    .form-control {
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--gray-light);
+      border-radius: 5px;
+      font-size: 1rem;
+    }
 
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+    .btn-auth {
+      padding: 1rem;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-        .remember-me input {
-            accent-color: var(--primary-color);
-        }
+    .btn-auth:hover {
+      background: var(--accent-color);
+    }
 
-        .forgot-password {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+    .auth-footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 14px;
+    }
 
-        .forgot-password:hover {
-            color: var(--accent-color);
-        }
+    .auth-footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
 
-        .btn-auth {
-            padding: 1rem;
-            background: var(--primary-color);
-            color: var(--light-text);
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 1rem;
-        }
+    .auth-footer a:hover {
+      color: var(--accent-color);
+    }
 
-        .btn-auth:hover {
-            background: var(--accent-color);
-        }
+    @media (max-width: 992px) {
+      .auth-container {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+      }
 
-        .auth-divider {
-            display: flex;
-            align-items: center;
-            margin: 1.5rem 0;
-            color: var(--gray-dark);
-        }
-
-        .auth-divider::before,
-        .auth-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--gray-light);
-        }
-
-        .auth-divider span {
-            padding: 0 1rem;
-        }
-
-        .social-login {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--background-color);
-            border: 1px solid var(--gray-light);
-            color: var(--text-color);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-btn:hover {
-            background: var(--primary-color);
-            color: var(--light-text);
-            border-color: var(--primary-color);
-        }
-
-        .auth-footer {
-            text-align: center;
-            margin-top: 2rem;
-            color: var(--gray-dark);
-        }
-
-        .auth-footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .auth-footer a:hover {
-            color: var(--accent-color);
-        }
-
-        @media (max-width: 992px) {
-            .auth-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .auth-image {
-                display: none;
-            }
-        }
-    </style>
+      .auth-image {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <h1>VIHARA</h1>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="destinations.html">Destinations</a></li>
-                <li><a href="tours.html">Tours & Packages</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <a href="login.html" class="btn-login active">Login</a>
-                <a href="register.html" class="btn-register">Register</a>
-            </div>
-        </nav>
-    </header>
 
-    <!-- Auth Container -->
-    <section class="auth-container">
-        <!-- Auth Image -->
-        <div class="auth-image">
-            <div class="auth-image-content">
-                <h2>Welcome Back!</h2>
-                <p>Sign in to access your account and start planning your next adventure.</p>
-            </div>
-        </div>
+  <!-- Navbar -->
+  <header>
+    <h1>VIHARA</h1>
+    <nav>
+      <!-- <a href="index.html">Home</a> -->
+    </nav>
+  </header>
 
-        <!-- Auth Form -->
-        <div class="auth-form-container">
-            <div class="auth-form-header">
-                <h1>Login</h1>
-                <p>Enter your credentials to access your account</p>
-            </div>
-            <form class="auth-form" id="loginForm">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
-                </div>
-                <div class="form-options">
-                    <div class="remember-me">
-                        <input type="checkbox" id="remember">
-                        <label for="remember">Remember me</label>
-                    </div>
-                    <a href="#" class="forgot-password">Forgot Password?</a>
-                </div>
-                <button type="submit" class="btn-auth">Login</button>
-            </form>
+  <!-- Auth Section -->
+  <section class="auth-container">
+    <!-- Image Side -->
+    <div class="auth-image">
+      <div class="auth-image-content">
+        <h2>Welcome Back!</h2>
+        <p>Sign in to access your account and start planning your next adventure.</p>
+      </div>
+    </div>
 
-            <div class="auth-divider">
-                <span>OR</span>
-            </div>
+    <!-- Login Form -->
+    <div class="auth-form-container">
+      <div class="auth-form-header">
+        <h1>Login</h1>
+        <p>Enter your credentials to continue</p>
+      </div>
+      <form class="auth-form" id="loginForm">
+        <input type="email" id="email" class="form-control" placeholder="Email Address" required />
+        <input type="password" id="password" class="form-control" placeholder="Password" required />
+        <button type="submit" class="btn-auth">Login</button>
+      </form>
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="register.html">Register</a></p>
+      </div>
+    </div>
+  </section>
 
-            <div class="social-login">
-                <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-btn"><i class="fab fa-google"></i></a>
-                <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-            </div>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      alert(`Login successful! Welcome back, ${email.split('@')[0]}!`);
+      window.location.href = 'index.html';
+    });
+  </script>
 
-            <div class="auth-footer">
-                <p>Don't have an account? <a href="register.html">Register</a></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>About VIHARA</h3>
-                <p>Your trusted travel companion for unforgettable experiences around the world.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="terms.html">Terms & Conditions</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>Email: info@vihara.com</p>
-                <p>Phone: +1 234 567 890</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 VIHARA. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="js/main.js"></script>
-    <script>
-        // Login form handling
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const remember = document.getElementById('remember').checked;
-            
-            // Here you would typically send the form data to a server for authentication
-            // For demonstration, we'll just show an alert
-            alert(`Login successful! Welcome back, ${email.split('@')[0]}!`);
-            
-            // Redirect to home page after successful login
-            // window.location.href = 'index.html';
-        });
-    </script>
 </body>
-</html> 
+</html>

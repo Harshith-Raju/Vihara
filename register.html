@@ -1,386 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - VIHARA</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .auth-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 8rem 5% 5rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register - VIHARA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #f77f00;
+      --accent-color: #e76f00;
+      --background-color: #ffffff;
+      --gray-light: #ddd;
+      --gray-dark: #666;
+      --text-color: #333;
+      --light-text: #fff;
+    }
 
-        .auth-image {
-            height: 100%;
-            min-height: 500px;
-            background: url('images/register-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px;
-            position: relative;
-        }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f2f2;
+    }
 
-        .auth-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
-            border-radius: 10px;
-        }
+    header {
+      background-color: #003049;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
 
-        .auth-image-content {
-            position: absolute;
-            bottom: 2rem;
-            left: 2rem;
-            color: var(--light-text);
-            z-index: 1;
-        }
+    header h1 {
+      margin: 0;
+    }
 
-        .auth-image-content h2 {
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
 
-        .auth-form-container {
-            background: var(--background-color);
-            border-radius: 10px;
-            padding: 3rem;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
-        }
+    .auth-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 5% 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
 
-        .auth-form-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+    .auth-image {
+      min-height: 500px;
+      background: url('images/register-bg.jpg') no-repeat center center/cover;
+      border-radius: 10px;
+      position: relative;
+    }
 
-        .auth-form-header h1 {
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-        }
+    .auth-image::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+      border-radius: 10px;
+    }
 
-        .auth-form-header p {
-            color: var(--gray-dark);
-        }
+    .auth-image-content {
+      position: absolute;
+      bottom: 2rem;
+      left: 2rem;
+      color: white;
+      z-index: 1;
+    }
 
-        .auth-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
+    .auth-image-content h2 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
+    .auth-form-container {
+      background: white;
+      padding: 3rem;
+      border-radius: 10px;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
+    .auth-form-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
 
-        .form-group label {
-            color: var(--text-color);
-            font-weight: 500;
-        }
+    .auth-form-header h1 {
+      color: var(--text-color);
+    }
 
-        .form-control {
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--gray-light);
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
 
-        .form-check {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
 
-        .form-check input {
-            margin-top: 0.3rem;
-            accent-color: var(--primary-color);
-        }
+    .form-group label {
+      color: var(--text-color);
+      font-weight: 500;
+    }
 
-        .form-check label {
-            color: var(--gray-dark);
-            font-size: 0.9rem;
-        }
+    .form-control {
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--gray-light);
+      border-radius: 5px;
+      font-size: 1rem;
+    }
 
-        .form-check a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+    .form-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
 
-        .form-check a:hover {
-            color: var(--accent-color);
-        }
+    .form-check input {
+      margin-top: 0.3rem;
+      accent-color: var(--primary-color);
+    }
 
-        .btn-auth {
-            padding: 1rem;
-            background: var(--primary-color);
-            color: var(--light-text);
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 1rem;
-        }
+    .form-check a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
 
-        .btn-auth:hover {
-            background: var(--accent-color);
-        }
+    .form-check a:hover {
+      color: var(--accent-color);
+    }
 
-        .auth-divider {
-            display: flex;
-            align-items: center;
-            margin: 1.5rem 0;
-            color: var(--gray-dark);
-        }
+    .btn-auth {
+      padding: 1rem;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 1rem;
+    }
 
-        .auth-divider::before,
-        .auth-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--gray-light);
-        }
+    .btn-auth:hover {
+      background: var(--accent-color);
+    }
 
-        .auth-divider span {
-            padding: 0 1rem;
-        }
+    .auth-footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 14px;
+    }
 
-        .social-login {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
+    .auth-footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
 
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--background-color);
-            border: 1px solid var(--gray-light);
-            color: var(--text-color);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
+    .auth-footer a:hover {
+      color: var(--accent-color);
+    }
 
-        .social-btn:hover {
-            background: var(--primary-color);
-            color: var(--light-text);
-            border-color: var(--primary-color);
-        }
+    @media (max-width: 992px) {
+      .auth-container {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+      }
 
-        .auth-footer {
-            text-align: center;
-            margin-top: 2rem;
-            color: var(--gray-dark);
-        }
+      .auth-image {
+        display: none;
+      }
 
-        .auth-footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .auth-footer a:hover {
-            color: var(--accent-color);
-        }
-
-        @media (max-width: 992px) {
-            .auth-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .auth-image {
-                display: none;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <h1>VIHARA</h1>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="destinations.html">Destinations</a></li>
-                <li><a href="tours.html">Tours & Packages</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <a href="login.html" class="btn-login">Login</a>
-                <a href="register.html" class="btn-register active">Register</a>
-            </div>
-        </nav>
-    </header>
 
-    <!-- Auth Container -->
-    <section class="auth-container">
-        <!-- Auth Image -->
-        <div class="auth-image">
-            <div class="auth-image-content">
-                <h2>Join Our Community!</h2>
-                <p>Create an account to start planning your dream vacations with VIHARA.</p>
-            </div>
+  <!-- Navbar -->
+  <header>
+    <h1>VIHARA</h1>
+    <nav>
+      <!-- <a href="index.html">Home</a> -->
+    </nav>
+  </header>
+
+  <!-- Register Section -->
+  <section class="auth-container">
+    <!-- Image Side -->
+    <div class="auth-image">
+      <div class="auth-image-content">
+        <h2>Join Our Community!</h2>
+        <p>Create an account to start planning your dream vacations with VIHARA.</p>
+      </div>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="auth-form-container">
+      <div class="auth-form-header">
+        <h1>Create Account</h1>
+        <p>Fill in the details to create your account</p>
+      </div>
+      <form class="auth-form" id="registerForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" class="form-control" placeholder="Enter your first name" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" class="form-control" placeholder="Enter your last name" required>
+          </div>
         </div>
-
-        <!-- Auth Form -->
-        <div class="auth-form-container">
-            <div class="auth-form-header">
-                <h1>Create Account</h1>
-                <p>Fill in the details to create your account</p>
-            </div>
-            <form class="auth-form" id="registerForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" class="form-control" placeholder="Enter your first name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" class="form-control" placeholder="Enter your last name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" class="form-control" placeholder="Create a password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
-                    </div>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">I agree to the <a href="terms.html">Terms & Conditions</a> and <a href="privacy.html">Privacy Policy</a></label>
-                </div>
-                <button type="submit" class="btn-auth">Create Account</button>
-            </form>
-
-            <div class="auth-divider">
-                <span>OR</span>
-            </div>
-
-            <div class="social-login">
-                <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-btn"><i class="fab fa-google"></i></a>
-                <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-
-            <div class="auth-footer">
-                <p>Already have an account? <a href="login.html">Login</a></p>
-            </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>About VIHARA</h3>
-                <p>Your trusted travel companion for unforgettable experiences around the world.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="terms.html">Terms & Conditions</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>Email: info@vihara.com</p>
-                <p>Phone: +1 234 567 890</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 VIHARA. All rights reserved.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="Create a password" required>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
+          </div>
         </div>
-    </footer>
+        <div class="form-check">
+          <input type="checkbox" id="terms" required>
+          <label for="terms">I agree to the <a href="terms.html">Terms & Conditions</a> and <a href="privacy.html">Privacy Policy</a></label>
+        </div>
+        <button type="submit" class="btn-auth">Create Account</button>
+      </form>
 
-    <script src="js/main.js"></script>
-    <script>
-        // Registration form handling
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            
-            // Validate password match
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
-            }
-            
-            // Here you would typically send the form data to a server for registration
-            // For demonstration, we'll just show an alert
-            alert(`Registration successful! Welcome to VIHARA, ${firstName}!`);
-            
-            // Redirect to home page after successful registration
-            // window.location.href = 'index.html';
-        });
-    </script>
+      <div class="auth-footer">
+        <p>Already have an account? <a href="login.html">Login</a></p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const firstName = document.getElementById('firstName').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+      }
+
+      alert(`Registration successful! Welcome to VIHARA, ${firstName}!`);
+      // Uncomment the below line to redirect after registration
+      // window.location.href = 'index.html';
+    });
+  </script>
+
 </body>
-</html> 
+</html>

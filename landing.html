@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VIHARA - Landing Page</title>
+</head>
+<body style="margin: 0; font-family: 'Segoe UI', sans-serif; background: #f2f2f2; color: #333;">
+
+  <!-- Navbar -->
+  <header style="background-color: #003049; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; color: white;">
+    <h1 style="margin: 0;">VIHARA</h1>
+    <nav>
+      <!-- <a href="index.html" style="color: white; margin-right: 20px; text-decoration: none;">Home</a> -->
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e'); background-size: cover; background-position: center; color: white; padding: 100px 40px; text-align: center;">
+    <h2 style="font-size: 48px; margin-bottom: 20px;">Embark on Unforgettable Journeys with VIHARA</h2>
+    <p style="font-size: 20px; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+      Discover breathtaking destinations, exclusive travel packages, and personalized experiences that turn your dream vacations into reality.
+    </p>
+    <button onclick="location.href='login.html'" onmouseover="hover(this)" onmouseout="unhover(this)"
+      style="padding: 15px 30px; font-size: 16px; margin-right: 15px; border: none; background-color: #f77f00; color: white; cursor: pointer; border-radius: 5px;">
+      Login
+    </button>
+    <button onclick="location.href='register.html'" onmouseover="hover(this)" onmouseout="unhover(this)"
+      style="padding: 15px 30px; font-size: 16px; border: none; background-color: #219ebc; color: white; cursor: pointer; border-radius: 5px;">
+      Register
+    </button>
+  </section>
+
+  <!-- Info Section -->
+  <section style="padding: 60px 40px; background-color: white;">
+    <h2 style="text-align: center; font-size: 36px; margin-bottom: 30px;">Why Choose VIHARA?</h2>
+    <div style="max-width: 1000px; margin: 0 auto; font-size: 18px; line-height: 1.8;">
+      <p><strong>🌍 Explore the World:</strong> With curated tours and handpicked destinations, VIHARA makes it easy to find your next adventure.</p>
+      <p><strong>💼 Travel Smart:</strong> Enjoy stress-free planning with our all-in-one booking platform, expert travel advice, and real-time updates.</p>
+      <p><strong>🧳 Tailored for You:</strong> Whether you’re looking for luxury, budget-friendly, solo, or family trips — VIHARA has something for every traveler.</p>
+      <p><strong>📱 Mobile Friendly:</strong> Plan, book, and manage your trips on the go with our responsive and user-friendly platform.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background-color: #003049; color: white; text-align: center; padding: 20px;">
+    &copy; 2025 VIHARA. All rights reserved.
+  </footer>
+
+  <script>
+    function hover(btn) {
+      btn.style.opacity = "0.9";
+      btn.style.transform = "scale(1.05)";
+    }
+    function unhover(btn) {
+      btn.style.opacity = "1";
+      btn.style.transform = "scale(1)";
+    }
+  </script>
+
+</body>
+</html>
